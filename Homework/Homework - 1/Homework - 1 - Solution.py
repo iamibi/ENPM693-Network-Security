@@ -33,20 +33,9 @@ def caesar_str_dec(cipher_text: str, decryption_key: int) -> str:
         A Caesar Cipher decryption function which takes in a
         cipher text string and an integer key and returns the plain text string.
     """
-    updated_text = cipher_text.upper()
-    updated_text = updated_text.strip().replace(' ', '')
 
-    # ASCII value of 'A'
-    ascii_val = 65
-    plain_text = []
-    for char in updated_text:
-        plain_char = char
-        if char.isalpha():
-            plain_char = chr((ord(char) - decryption_key + ascii_val) % 26 + ascii_val)
-        plain_text.append(plain_char)
+    return caesar_str_enc(cipher_text, 26 - (decryption_key % 26))
 
-    return ''.join(plain_text)
-    
 
 if __name__ == '__main__':
     original_plain_str = 'hi 123 abc parse it  '
