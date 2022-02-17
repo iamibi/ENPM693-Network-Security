@@ -4,7 +4,7 @@ Last_Name = "Ibrahim"
 First_Name = "Syed Mohammad"
 
 
-def caesar_str_enc(plain_text: str, encryption_key: int) -> str:
+def caesar_str_enc(plain_text, encryption_key):
     """ 
         A Caesar Cipher encryption function which takes in a
         plain text string and an integer key and returns a ciphered string.
@@ -28,7 +28,7 @@ def caesar_str_enc(plain_text: str, encryption_key: int) -> str:
     return ''.join(cipher_text)
     
 
-def caesar_str_dec(cipher_text: str, decryption_key: int) -> str:
+def caesar_str_dec(cipher_text, decryption_key):
     """ 
         A Caesar Cipher decryption function which takes in a
         cipher text string and an integer key and returns the plain text string.
