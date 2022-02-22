@@ -1,7 +1,13 @@
 from Homework_2_Solution import row_trans_enc, row_trans_dec
 
 
-def validate(test_case, plain_text, cipher_key, exp_enc_text, exp_dec_text):
+def validate(
+    test_case: int,
+    plain_text: str,
+    cipher_key: str,
+    exp_enc_text: str,
+    exp_dec_text: str,
+) -> None:
     print(f"Testing Case #{test_case}")
     actual_enc_text = row_trans_enc(plain_text, cipher_key)
     actual_dec_text = row_trans_dec(actual_enc_text, cipher_key)
