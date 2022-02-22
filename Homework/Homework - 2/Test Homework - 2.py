@@ -37,3 +37,12 @@ if __name__ == "__main__":
         exp_enc_text="TTNAAPTMTSUOAODWCOIXKNLXPETX",
         exp_dec_text="ATTACKPOSTPONEDUNTILTWOAMXXX",
     )
+    
+    # Test Case - 2
+    validate(
+        test_case=3,
+        plain_text="ATTACK postponed UNTIL TWO AM",
+        cipher_key="4312567",
+        exp_enc_text="TtNAApTMTsUOAodWCoIXKnLXpeTX",
+        exp_dec_text="ATTACKpostponedUNTILTWOAMXXX",
+    )
