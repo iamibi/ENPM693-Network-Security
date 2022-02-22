@@ -14,12 +14,12 @@ def row_trans_enc(plain_text, encryption_key):
     """
     Method to perform Row Transposition Cipher encryption using the plain_text
     and encryption_key provided.
-    :param plain_text: str
-    :param encryption_key: str
-    :return: str
+    :param plain_text: str - Message to be encrypted
+    :param encryption_key: str - The key used for encrypting the plain_text message
+    :return: str - Cipher Text
     """
 
-    # Get the length of the key for adjusting the padding and number of columns
+    # Get the length of the key for number of columns
     columns = len(encryption_key)
 
     # If the length of key is 0, return the plain_text string
@@ -62,9 +62,46 @@ def row_trans_enc(plain_text, encryption_key):
 
 
 def row_trans_dec(cipher_text, decryption_key):
-    pass
+    """
+    Method to perform Row Transposition Cipher decryption using the cipher_text
+    and decryption_key provided.
+    :param cipher_text: str - Encrypted text to be decrypted
+    :param decryption_key: str - The key that will be used to perform decryption on the cipher_text
+    :return: str - Plain Text
+    """
+
+    # Get the length of the key for number of columns
+    columns = len(decryption_key)
+
+    # Get the number of rows for the matrix
+    message_len = float(len(cipher_text))
+    rows = int(ceil(message_len) / columns)
+
+    # Generate an empty matrix to be filled
+    # The generated matrix will look like [[None x columns], [None x columns], ... x rows]
+    matrix = [[None] * columns for _ in range(rows)]
+
+    # Convert the decryption_key to an integer list and sort them
+    decryption_key_list = sorted(list([int(val) for val in decryption_key]))
+
+    index = 0
+    for col in range(columns):
+        # Get the index of the individual key value from the original decryption_key
+        current = decryption_key.index(str(decryption_key_list[col]))
+
+        # Build a matrix from each of the cipher_text value at position `row`
+        for row in range(rows):
+            matrix[row][current] = cipher_text[index]
+            index += 1
+
+    # Convert the matrix to a string
+    # The sum(matrix, []) will convert a list like this [['A', 'B'], ['C', 'D']] to
+    # a list ['A', 'B', 'C', 'D']
+    return "".join(sum(matrix, []))
 
 
 if __name__ == "__main__":
-    enc_str = row_trans_enc("ATTACKPOSTPONEDUNTILTWOAM", "4312567")
+    cipher_key = "4312567"
+    enc_str = row_trans_enc("ATTACKPOSTPONEDUNTILTWOAM", cipher_key)
     print("Encrypted string", enc_str)
+    print("Decrypted string", row_trans_dec(enc_str, cipher_key))

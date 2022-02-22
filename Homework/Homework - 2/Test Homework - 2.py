@@ -1,43 +1,33 @@
 from Homework_2_Solution import row_trans_enc, row_trans_dec
 
+
+def validate(test_case, plain_text, cipher_key, exp_enc_text, exp_dec_text):
+    print(f"Testing Case #{test_case}")
+    actual_enc_text = row_trans_enc(plain_text, cipher_key)
+    actual_dec_text = row_trans_dec(actual_enc_text, cipher_key)
+
+    print("Encrypted Text:", actual_enc_text)
+    print("Decrypted Text:", actual_dec_text)
+
+    assert exp_enc_text == actual_enc_text
+    assert exp_dec_text == actual_dec_text
+
+
 if __name__ == "__main__":
-    original_plain_str = "hi 123 abc parse it  "
+    # Test Case - 1
+    validate(
+        test_case=1,
+        plain_text="ATTACKPOSTPONEDUNTILTWOAM",
+        cipher_key="4312567",
+        exp_enc_text="TTNAAPTMTSUOAODWCOIXKNLXPETX",
+        exp_dec_text="ATTACKPOSTPONEDUNTILTWOAMXXX",
+    )
 
-    # Encryption and Decryption - Test #1
-    key = 12
-    expected_enc_str = "tu123mnobmdequf".upper()
-    expected_plain_str = "HI123ABCPARSEIT"
-
-    actual_enc_str = caesar_str_enc(original_plain_str, key)
-    actual_dec_str = caesar_str_dec(actual_enc_str, key)
-    print("Encrypted string: ", actual_enc_str)
-    print("Decrypted string: ", actual_dec_str)
-
-    assert expected_enc_str == actual_enc_str
-    assert expected_plain_str == actual_dec_str
-
-    # Encryption and Decryption - Test #2
-    key = 51
-    expected_enc_str = "gh123zabozqrdhs".upper()
-
-    actual_enc_str = caesar_str_enc(original_plain_str, key)
-    actual_dec_str = caesar_str_dec(actual_enc_str, key)
-    print("Encrypted string: ", actual_enc_str)
-    print("Decrypted string: ", actual_dec_str)
-
-    assert expected_enc_str == actual_enc_str
-    assert expected_plain_str == actual_dec_str
-
-    # Encryption and Decryption - Test #3
-    original_plain_str = "A TEST SENTENCE"
-    key = 2
-    expected_enc_str = "CVGUVUGPVGPEG"
-    expected_plain_str = "ATESTSENTENCE"
-
-    actual_enc_str = caesar_str_enc(original_plain_str, key)
-    actual_dec_str = caesar_str_dec(actual_enc_str, key)
-    print("Encrypted string: ", actual_enc_str)
-    print("Decrypted string: ", actual_dec_str)
-
-    assert expected_enc_str == actual_enc_str
-    assert expected_plain_str == actual_dec_str
+    # Test Case - 2
+    validate(
+        test_case=2,
+        plain_text="ATTACK POSTPONED UNTIL TWO AM",
+        cipher_key="4312567",
+        exp_enc_text="TTNAAPTMTSUOAODWCOIXKNLXPETX",
+        exp_dec_text="ATTACKPOSTPONEDUNTILTWOAMXXX",
+    )
