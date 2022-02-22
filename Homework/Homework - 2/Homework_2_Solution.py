@@ -98,10 +98,3 @@ def row_trans_dec(cipher_text, decryption_key):
     # The sum(matrix, []) will convert a list like this [['A', 'B'], ['C', 'D']] to
     # a list ['A', 'B', 'C', 'D']
     return "".join(sum(matrix, []))
-
-
-if __name__ == "__main__":
-    cipher_key = "4312567"
-    enc_str = row_trans_enc("ATTACKPOSTPONEDUNTILTWOAM", cipher_key)
-    print("Encrypted string", enc_str)
-    print("Decrypted string", row_trans_dec(enc_str, cipher_key))
