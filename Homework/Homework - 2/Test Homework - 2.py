@@ -38,11 +38,20 @@ if __name__ == "__main__":
         exp_dec_text="ATTACKPOSTPONEDUNTILTWOAMXXX",
     )
     
-    # Test Case - 2
+    # Test Case - 3
     validate(
         test_case=3,
         plain_text="ATTACK postponed UNTIL TWO AM",
         cipher_key="4312567",
         exp_enc_text="TtNAApTMTsUOAodWCoIXKnLXpeTX",
         exp_dec_text="ATTACKpostponedUNTILTWOAMXXX",
+    )
+    
+    # Test Case - 4
+    validate(
+        test_case=4,
+        plain_text="MY NAME IS IBRAHIM",
+        cipher_key="3261475",
+        exp_enc_text="ARXYIXMSMMAXIIXNBXEHX",
+        exp_dec_text="MYNAMEISIBRAHIMXXXXXX",
     )
