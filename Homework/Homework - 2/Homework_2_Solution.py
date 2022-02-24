@@ -82,7 +82,7 @@ def row_trans_dec(cipher_text, decryption_key):
     matrix = [[None] * columns for _ in range(rows)]
 
     # Convert the decryption_key to an integer list and sort them
-    decryption_key_list = sorted(list([int(val) for val in decryption_key]))
+    decryption_key_list = sorted([int(val) for val in decryption_key])
 
     index = 0
     for col in range(columns):
