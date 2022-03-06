@@ -1,43 +1,36 @@
-from Homework_1_Solution import caesar_str_enc, caesar_str_dec
+from Homework_3_Solution import feistel_enc, feistel_dec
 
-if __name__ == '__main__':
-    original_plain_str = 'hi 123 abc parse it  '
 
-    # Encryption and Decryption - Test #1
-    key = 12
-    expected_enc_str = 'tu123mnobmdequf'.upper()
-    expected_plain_str = 'HI123ABCPARSEIT'
+def validate(
+    test_case: int,
+    plain_text: str,
+    rounds: int,
+    seed: int,
+    exp_enc_text_bytes: bytes,
+    exp_dec_text_bytes: bytes,
+) -> None:
+    print(f"Testing Case #{test_case}")
 
-    actual_enc_str = caesar_str_enc(original_plain_str, key)
-    actual_dec_str = caesar_str_dec(actual_enc_str, key)
-    print("Encrypted string: ", actual_enc_str)
-    print("Decrypted string: ", actual_dec_str)
+    # Convert the string object to bytes string
+    plain_text_bytes = plain_text.encode("utf-8")
 
-    assert expected_enc_str == actual_enc_str
-    assert expected_plain_str == actual_dec_str
+    actual_enc_text_bytes = feistel_enc(plain_text_bytes, rounds, seed)
+    actual_dec_text_bytes = feistel_dec(actual_enc_text_bytes, rounds, seed)
 
-    # Encryption and Decryption - Test #2
-    key = 51
-    expected_enc_str = 'gh123zabozqrdhs'.upper()
+    print("Encrypted Text:", actual_enc_text_bytes)
+    print("Decrypted Text:", actual_dec_text_bytes)
 
-    actual_enc_str = caesar_str_enc(original_plain_str, key)
-    actual_dec_str = caesar_str_dec(actual_enc_str, key)
-    print("Encrypted string: ", actual_enc_str)
-    print("Decrypted string: ", actual_dec_str)
+    assert exp_enc_text_bytes == actual_enc_text_bytes
+    assert exp_dec_text_bytes == actual_dec_text_bytes
 
-    assert expected_enc_str == actual_enc_str
-    assert expected_plain_str == actual_dec_str
 
-    # Encryption and Decryption - Test #3
-    original_plain_str = 'A TEST SENTENCE'
-    key = 2
-    expected_enc_str = 'CVGUVUGPVGPEG'
-    expected_plain_str = 'ATESTSENTENCE'
-
-    actual_enc_str = caesar_str_enc(original_plain_str, key)
-    actual_dec_str = caesar_str_dec(actual_enc_str, key)
-    print("Encrypted string: ", actual_enc_str)
-    print("Decrypted string: ", actual_dec_str)
-
-    assert expected_enc_str == actual_enc_str
-    assert expected_plain_str == actual_dec_str
+if __name__ == "__main__":
+    # Test Case - 1
+    validate(
+        test_case=1,
+        plain_text="isthis16bytes?",
+        rounds=16,
+        seed=50,
+        exp_enc_text_bytes=b"}\xd9\x93-G\x8e\xaa5\x95\x84\n\xb7q\xc4>\xb6",
+        exp_dec_text_bytes=b"isthis16bytes?  "
+    )
