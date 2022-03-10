@@ -24,7 +24,7 @@ def validate(
     assert exp_dec_text_bytes == actual_dec_text_bytes
 
 
-if __name__ == "__main__":
+def test_homework():
     # Test Case - 1
     validate(
         test_case=1,
@@ -33,4 +33,14 @@ if __name__ == "__main__":
         seed=50,
         exp_enc_text_bytes=b"}\xd9\x93-G\x8e\xaa5\x95\x84\n\xb7q\xc4>\xb6",
         exp_dec_text_bytes=b"isthis16bytes?  "
+    )
+
+    # Test Case - 2
+    validate(
+        test_case=2,
+        plain_text="testing123!",
+        rounds=18,
+        seed=44,
+        exp_enc_text_bytes=b"\xa0|\xc8V\x1ec\xaf\xb7\xd8\xf1\xb0;\xc1^8\x90",
+        exp_dec_text_bytes=b"testing123!     "
     )
