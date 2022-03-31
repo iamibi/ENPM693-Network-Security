@@ -23,8 +23,8 @@ if __name__ == "__main__":
     # Test Case - 1
     validate(
         test_case=1,
-        plain_text="ATTACKPOSTPONEDUNTILTWOAM",
-        cipher_key="4312567",
+        plain_text="adguehislqid",
+        cipher_key="3142",
         exp_enc_text="TTNAAPTMTSUOAODWCOIXKNLXPETX",
         exp_dec_text="ATTACKPOSTPONEDUNTILTWOAMXXX",
     )
