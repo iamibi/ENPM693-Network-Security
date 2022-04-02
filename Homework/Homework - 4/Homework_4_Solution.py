@@ -30,8 +30,6 @@ def aes_input_av_test(input_block, key, bit_list):
     diff_list = []
 
     # 2- perform encryption of the original values
-    #    anyway you like. It doesn't have to be
-    #    with this exact function form
     original_cipher = aes_encrypt(input_block, key)
 
     # 3- for every value given in the bit_list:
