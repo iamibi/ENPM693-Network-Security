@@ -22,10 +22,6 @@ def aes_input_av_test(input_block, key, bit_list):
     [0, 3, 6, 25, 78, 127]
     """
 
-    # Make sure that the length of the string is MAX_BLOCK_SIZE long
-    if len(input_block) < MAX_BLOCK_SIZE:
-        input_block = pad(input_block, MAX_BLOCK_SIZE)
-
     # 1- any initializations necessary
     diff_list = []
 
@@ -57,10 +53,6 @@ def aes_key_av_test(input_block, key, bit_list):
     bit in the input_block that needs to be inverted, one at a time, for example
     [0, 3, 6, 25, 78, 127]
     """
-
-    # Make sure that the length of the string is MAX_BLOCK_SIZE long
-    if len(input_block) < MAX_BLOCK_SIZE:
-        input_block = pad(input_block, MAX_BLOCK_SIZE)
 
     # 1- any initializations necessary
     diff_list = []
@@ -107,6 +99,11 @@ def aes_encrypt(input_block, key):
     :param input_block: bytes
     :param key: bytes
     """
+
+    # Make sure that the length of the input_block is MAX_BLOCK_SIZE long
+    if len(input_block) < MAX_BLOCK_SIZE:
+        input_block = pad(input_block, MAX_BLOCK_SIZE)
+
     # Set the mode to ECB
     mode = AES.MODE_ECB
 
