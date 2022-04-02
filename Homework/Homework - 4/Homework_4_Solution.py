@@ -148,14 +148,3 @@ def convert_bit_to_byte_string(input_bits):
         char = chr(int(input_bits[index : index + 8], base=2))
         str_list.append(char)
     return "".join(str_list).encode(encoding="utf-8")
-
-
-if __name__ == "__main__":
-    plain_text = b"isthis16bytes?"
-    key_val = b"veryverylongkey!"
-    bits = [5, 29, 38]
-    res = aes_input_av_test(plain_text, key_val, bits)
-    print(f"aes_input_av_test: {res}")
-
-    res = aes_key_av_test(plain_text, key_val, bits)
-    print(f"aes_key_av_test: {res}")
