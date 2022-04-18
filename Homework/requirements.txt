@@ -91,8 +91,8 @@ stack-data==0.2.0
 systemd-python==234
 tomli==2.0.1
 traitlets==5.1.1
-typing_extensions==4.1.1
-ubuntu-advantage-tools==27.6
+typing_extensions==4.2.0
+ubuntu-advantage-tools==27.7
 ubuntu-drivers-common==0.0.0
 ufw==0.36
 unattended-upgrades==0.1
