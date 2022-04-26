@@ -25,6 +25,10 @@ def aes_input_av_test(input_block, key, bit_list):
     # 1- any initializations necessary
     diff_list = []
 
+    # Make sure that the length of the input_block is MAX_BLOCK_SIZE long
+    if len(input_block) < MAX_BLOCK_SIZE:
+        input_block = pad(input_block, MAX_BLOCK_SIZE)
+
     # 2- perform encryption of the original values
     original_cipher = aes_encrypt(input_block, key)
 
@@ -57,6 +61,10 @@ def aes_key_av_test(input_block, key, bit_list):
     # 1- any initializations necessary
     diff_list = []
 
+    # Make sure that the length of the input_block is MAX_BLOCK_SIZE long
+    if len(input_block) < MAX_BLOCK_SIZE:
+        input_block = pad(input_block, MAX_BLOCK_SIZE)
+
     # 2- perform encryption of the original values
     original_cipher = aes_encrypt(input_block, key)
 
@@ -86,10 +94,10 @@ def invert_bit(input_val, position):
     :param position: int
     """
 
-    bits_list = list(convert_byte_to_bit_string(input_val))
-    bits_list[position] = "0" if bits_list[position] == "1" else "1"
-    bit_str = "".join(bits_list)
-    return convert_bit_to_byte_string(bit_str)
+    bit_block = list("".join([format(b, "08b") for b in input_val]))
+    bit_block[position] = str(int(bit_block[position]) ^ 1)
+    bit_block = "".join(bit_block)
+    return bytes(int(bit_block[i : i + 8], 2) for i in range(0, len(bit_block), 8))
 
 
 def aes_encrypt(input_block, key):
@@ -99,10 +107,6 @@ def aes_encrypt(input_block, key):
     :param input_block: bytes
     :param key: bytes
     """
-
-    # Make sure that the length of the input_block is MAX_BLOCK_SIZE long
-    if len(input_block) < MAX_BLOCK_SIZE:
-        input_block = pad(input_block, MAX_BLOCK_SIZE)
 
     # Set the mode to ECB
     mode = AES.MODE_ECB
@@ -122,24 +126,12 @@ def find_bit_difference(value_1, value_2):
     """
 
     # Convert both the values to a bit list.
-    val_1_bits = list(convert_byte_to_bit_string(value_1))
-    val_2_bits = list(convert_byte_to_bit_string(value_2))
+    val_1_bits = list("".join([format(value, "08b") for value in value_1]))
+    val_2_bits = list("".join([format(value, "08b") for value in value_2]))
 
     difference = 0
-    for index in range(len(val_1_bits)):
-        if val_1_bits[index] != val_2_bits[index]:
+    for val_1, val_2 in zip(val_1_bits, val_2_bits):
+        if val_1 != val_2:
             difference += 1
 
     return difference
-
-
-def convert_byte_to_bit_string(input_bytes):
-    return "".join(format(char, "08b") for char in input_bytes)
-
-
-def convert_bit_to_byte_string(input_bits):
-    str_list = []
-    for index in range(0, len(input_bits), 8):
-        char = chr(int(input_bits[index : index + 8], base=2))
-        str_list.append(char)
-    return "".join(str_list).encode(encoding="utf-8")
